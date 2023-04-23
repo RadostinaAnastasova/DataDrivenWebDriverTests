@@ -71,6 +71,34 @@ namespace DataDrivenWebDriverTests
 
             Assert.That(expectedResult, Is.EqualTo(resultField.Text));
         }
+        [Test]
+        public void Test_Sum_ResetButton()
+        {
+            // Arrange
+            var firstInput = driver.FindElement(By.Id("number1"));
+            firstInput.SendKeys("-10");
+
+            var operationField = driver.FindElement(By.Id("operation"));
+            operationField.SendKeys("+");
+
+            var secondInput = driver.FindElement(By.Id("number2"));
+            secondInput.SendKeys("-2");
+
+            var calcButton = driver.FindElement(By.Id("calcButton"));
+
+            // Act
+            calcButton.Click();
+
+            // Assert
+            //var resultField = driver.FindElement(By.Id("result"));
+            //var expectedResult = "Result: -12";
+
+            var resetButton = driver.FindElement(By.Id("resetButton"));
+            resetButton.Click();
+
+            Assert.That(firstInput.Text, Is.Empty);
+            Assert.That(secondInput.Text, Is.Empty);
+        }
 
         [Test]
         public void Test_Multiply_TwoPositiveNumbers()
